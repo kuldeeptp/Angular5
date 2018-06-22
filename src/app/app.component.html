@@ -1,0 +1,79 @@
+<app-toolbar></app-toolbar>
+<app-signin></app-signin>
+
+
+
+
+<h1>Realtime Ambassdor Tracking</h1>
+
+
+<agm-map 
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="true"
+  [zoomControl]="true"
+ >
+
+  <agm-marker 
+      *ngFor="let m of markers; let i = index"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      >
+      
+    <agm-info-window [isOpen]="true" [disableAutoPan]="false">
+      <div [innerHTML]="m.content"></div>
+    </agm-info-window>
+    
+  </agm-marker>
+  
+  <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+      [radius]="5000"
+      [fillColor]="'red'"
+      [circleDraggable]="true"
+      [editable]="true">
+  </agm-circle>
+
+</agm-map>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort  >  
+      <!-- Name Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef > Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="ambassadorid">
+          <mat-header-cell *matHeaderCellDef > AmbassadorId </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ambassadorid}} </mat-cell>
+        </ng-container>
+  
+      <!-- Name Column -->
+        <ng-container matColumnDef="created">
+          <mat-header-cell *matHeaderCellDef > created </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.created}} </mat-cell>
+        </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="logintime" >
+          <mat-header-cell *matHeaderCellDef> logintime </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.logintime}} </mat-cell>
+        </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="loginimageurl">
+          <mat-header-cell *matHeaderCellDef> loginimageurl </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.loginimageurl}} </mat-cell>
+        </ng-container>
+  
+        
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>

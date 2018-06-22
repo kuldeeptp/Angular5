@@ -1,0 +1,17 @@
+<div class="example-container">
+    <mat-spinner style="top:30%; left: 45%; position: absolute;" *ngIf="wait"></mat-spinner>
+  <form #myform="ngForm" (ngSubmit)="submit(myform)">
+    <mat-form-field>
+        <input matInput placeholder="Email" type="email" required name="email" [(ngModel)]="email">
+
+      </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required name="password" [(ngModel)]="password">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="accent" [disabled]="!myform.form.valid">Submit</button>
+  </form>
+  {{form|json}}
+</div>
